@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect } from 'react';
 
-function App() {
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Mousewheel, Navigation } from "swiper";
+import Video from './components/Video';
+import { getDeviceType } from './utilities/getDeviceType';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './styles.css';
+
+
+export default function App() {
+  const swiperRef = useRef(null) as any;
+  console.log('navigator => ', navigator)
+
+  useEffect(() => {
+    console.log('getDeviceType => ', getDeviceType())
+    if (swiperRef.current) {
+      const swiperInstance = swiperRef.current.swiper;
+      swiperInstance.on('slideChange', function () {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => video.pause());
+        setTimeout(() => {
+          const activeVideo = document.querySelector('.swiper-slide-active video') as HTMLVideoElement;
+          if (activeVideo && getDeviceType() !== 'iPhone') {
+            activeVideo.play()
+          }
+        }, 500)
+      })
+    }
+
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Swiper
+        ref={swiperRef}
+        direction={'vertical'}
+        mousewheel={true}
+        modules={[Mousewheel, Pagination]}
+        className="mySwiper"
+      >
+        {['Audi_A4_S4', 'Bugatti_Chiron', 'Range_Rover_Sport_L322', 'Rolls_Royce_Ghost', 'Toyota_Camry_XV70', 'Volkswagen_Golf_7'].map((link, index) => {
+          return (
+            <SwiperSlide key={index} >
+              <Video {...{ link }} />
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
+    </>
   );
 }
-
-export default App;
