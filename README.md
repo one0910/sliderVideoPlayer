@@ -1,46 +1,23 @@
-# Getting Started with Create React App
+# Slider 短影片效果
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[展示效果](https://slidervideoplay.onrender.com)
+https://slidervideoplay.onrender.com
 
-## Available Scripts
+## 說明
 
-In the project directory, you can run:
+### `前端環境`: Raact + Typescript
 
-### `npm start`
+### `實作方向`: 
+  - Slider效果使用swiper
+  - 播放器使用plyr，播放檔案為m3u8d檔
+  - 影像解碼library為hls.js (for 桌機版用)
+  - css排版:手刻
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 版本差異
+- iPhone手機，可上下滑動，但無自動播放，礙於IOS有些限制，需要開啟靜音才可自動播放，因此先把自動播放的功能關閉
+- Android手機，可上下滑動，影片自動播放
+- 桌機RWD，可上下滑動，影片自動播放
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 加分題
+- 說明: 我在第一個slider的視頻裡，我有加入加分題功能，影片播放5秒後會彈跳出alert訊息，並告知需加入會員才可觀看，而視頻內容則無法讓使用者繼續操作下去
+- 作法: 使用plyr的currentTime來確認目前目前已播放時間，並透過css添加一個覆蓋層，讓用戶無法再進行影片操作及觀看
